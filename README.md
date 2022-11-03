@@ -24,3 +24,15 @@ Then install ape's required plugins:
 ```
 ape plugins install .
 ```
+
+## Working with ape
+
+Compile the contracts:
+```
+ape compile
+```
+
+Compile and deploy the contracts locally:
+```
+ape run deploy_circle_nft --network ethereum:local:test
+```
