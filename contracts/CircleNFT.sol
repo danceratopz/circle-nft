@@ -67,14 +67,17 @@ contract CircleNFT is ERC721, Ownable {
         erc20Balances[tokenId] += amount;
     }
 
-    function tokenURI(uint256 id) public view override returns (string memory) {
-        //require(_exists(id), "not exist");
+    function tokenURI(uint256 tokenId) public view override returns (string memory) {
+        require(_exists(tokenId), "not exist");
+
+        string memory name = string(abi.encodePacked("Circle ", tokenId.toString()));
+        string memory radius = getRadius(tokenId).toString();
 
         string memory jsonMetadata =  string(abi.encodePacked(
             'data:application/json;base64,',
-            Base64.encode(bytes(abi.encodePacked(//"Hello")))));
-                '{"name":"', string(abi.encodePacked("Circle ", id.toString(), '",')),
-                '"radius":"', getRadius(id).toString(), '"}')))));
+            Base64.encode(bytes(abi.encodePacked(
+                '{"name":"', name, '",',
+                '"radius":"', radius, '"}')))));
         return jsonMetadata;
     }
 
