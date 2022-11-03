@@ -26,6 +26,8 @@
     "apeworx",
     "CIRCLETOKEN",
     "dotenv",
+    "isort",
+    "Precommit",
     "pydantic",
     "pyenv",
     "pytest",
