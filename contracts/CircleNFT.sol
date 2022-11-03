@@ -19,6 +19,7 @@ contract CircleNFT is ERC721, Ownable {
 
     address erc20Address;
     mapping(uint256 => uint256) erc20Balances;
+    uint256 maxRadius = 1 ether;
 
     constructor(address _erc20Address) ERC721("CircleNFT", "CIRCLE") {
         erc20Address = _erc20Address;
@@ -59,12 +60,12 @@ contract CircleNFT is ERC721, Ownable {
 
     function increaseRadius(uint256 tokenId, uint256 amount) public {
         require(ownerOf(tokenId) == msg.sender, "Not token owner");
-        // require tokenId to exist
-        // ceil if amount exceeds max allowed balance
-
+        // TODO: use ceil if amount exceeds max allowed balance
+        uint256 newRadius = erc20Balances[tokenId] + amount;
+        require(newRadius <= maxRadius, "circle would exceed max radius");
 
         IERC20(erc20Address).safeTransferFrom(msg.sender, address(this), amount);
-        erc20Balances[tokenId] += amount;
+        erc20Balances[tokenId] = newRadius;
     }
 
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
