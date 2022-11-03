@@ -24,6 +24,19 @@ Then install ape's required plugins:
 ```
 ape plugins install .
 ```
+## VSCode
+
+The checked in settings and recommended extensions should enable automatic:
+- linting via `flake8`.
+- import statement ordering via `isort`.
+- code formatting upon save via `black`.
+
+## Precommit
+
+`pre-commit` is used to perform some lint checks upon commit and push. Enable `pre-commit` with:
+```
+pre-commit install
+```
 
 ## Working with ape
 
