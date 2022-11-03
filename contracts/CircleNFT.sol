@@ -66,7 +66,7 @@ contract CircleNFT is ERC721, Ownable {
         IERC20(erc20Address).safeTransferFrom(msg.sender, address(this), amount);
         erc20Balances[tokenId] += amount;
     }
-  
+
     function tokenURI(uint256 id) public view override returns (string memory) {
         //require(_exists(id), "not exist");
 

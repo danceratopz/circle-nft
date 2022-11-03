@@ -3,12 +3,12 @@ name: circle-nft
 plugins:
   - name: solidity
     version: 0.5.1
-        
+
 dependencies:
   - name: OpenZeppelin
     github: OpenZeppelin/openzeppelin-contracts
     version: 4.7.2
 
-solidity: 
+solidity:
   import_remapping:
     - "@openzeppelin/contracts=OpenZeppelin/4.7.2/"
