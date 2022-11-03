@@ -46,9 +46,9 @@ contract CircleNFT is ERC721, Ownable {
         return newItemId;
     }
 
-    function getRadius(uint256 id) public view returns (uint256) {
-        //require(_exists(id), "not exist");
-        return erc20Balances[id];
+    function getRadius(uint256 tokenId) public view returns (uint256) {
+        require(_exists(tokenId), "not exist");
+        return erc20Balances[tokenId];
     }
 
     /// @notice Helper that returns the ID last minted NFT.
@@ -59,6 +59,7 @@ contract CircleNFT is ERC721, Ownable {
     }
 
     function increaseRadius(uint256 tokenId, uint256 amount) public {
+        require(_exists(tokenId), "not exist");
         require(ownerOf(tokenId) == msg.sender, "Not token owner");
         // TODO: use ceil if amount exceeds max allowed balance
         uint256 newRadius = erc20Balances[tokenId] + amount;
