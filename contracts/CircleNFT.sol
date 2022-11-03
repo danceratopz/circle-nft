@@ -64,9 +64,18 @@ contract CircleNFT is ERC721, Ownable {
         // TODO: use ceil if amount exceeds max allowed balance
         uint256 newRadius = erc20Balances[tokenId] + amount;
         require(newRadius <= maxRadius, "circle would exceed max radius");
-
-        IERC20(erc20Address).safeTransferFrom(msg.sender, address(this), amount);
         erc20Balances[tokenId] = newRadius;
+        IERC20(erc20Address).safeTransferFrom(msg.sender, address(this), amount);
+    }
+
+    function decreaseRadius(uint256 tokenId, uint256 amount) public {
+        require(_exists(tokenId), "not exist");
+        require(ownerOf(tokenId) == msg.sender, "Not token owner");
+        uint256 newRadius = erc20Balances[tokenId] - amount;
+        require(newRadius >= 0, "circle would have neg radius");
+        erc20Balances[tokenId] = newRadius;
+        IERC20(erc20Address).approve(address(this), amount);
+        IERC20(erc20Address).safeTransferFrom(address(this), msg.sender, amount);
     }
 
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
