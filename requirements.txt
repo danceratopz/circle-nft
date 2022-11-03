@@ -1,1 +1,5 @@
+black
 eth-ape
+flake8
+isort
+pre-commit
