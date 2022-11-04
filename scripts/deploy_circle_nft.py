@@ -91,6 +91,7 @@ def main():
     metadata = circle_nft_helper.get_token_metadata(token_id)
     assert int(metadata["radius"]) == circle_nft.getRadius(token_id)
     assert int(metadata["radius"]) == new_radius
+    print(metadata["image"])
     print(circle_nft_helper.get_token_svg(token_id))
 
     return circle_nft, circle_token

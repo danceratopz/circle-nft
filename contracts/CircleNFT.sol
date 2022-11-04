@@ -85,9 +85,14 @@ contract CircleNFT is ERC721, Ownable {
         string memory radius = getRadius(tokenId).toString();
         string memory svg = string.concat(
             '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" style="background:#fff">',
+            '<circle cx="100" cy="100" r="100" fill="#e7e3e3"/>',
+            '<circle cx="100" cy="100" r="80" fill="#d4d3d3"/>',
+            '<circle cx="100" cy="100" r="60" fill="#bfbcbc"/>  ',
+            '<circle cx="100" cy="100" r="40" fill="#b0aeae"/>',
+            '<circle cx="100" cy="100" r="20" fill="#9f9e9e"/>',
             '<circle cx="100" cy="100" r="',
             radius,
-            '" fill="#000"/>',
+            '" fill-opacity="0" stroke="#c91c62" stroke-width="1"/>',
             "</svg>"
         );
         string memory json = string.concat(
