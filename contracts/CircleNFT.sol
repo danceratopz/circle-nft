@@ -65,6 +65,7 @@ contract CircleNFT is ERC721, Ownable {
         uint256 newRadius = erc20Balances[tokenId] + amount;
         require(newRadius <= maxRadius, "circle would exceed max radius");
         erc20Balances[tokenId] = newRadius;
+        IERC20(erc20Address).approve(address(this), amount);
         IERC20(erc20Address).safeTransferFrom(msg.sender, address(this), amount);
     }
 
@@ -74,7 +75,6 @@ contract CircleNFT is ERC721, Ownable {
         uint256 newRadius = erc20Balances[tokenId] - amount;
         require(newRadius >= 0, "circle would have neg radius");
         erc20Balances[tokenId] = newRadius;
-        IERC20(erc20Address).approve(address(this), amount);
         IERC20(erc20Address).safeTransferFrom(address(this), msg.sender, amount);
     }
 
