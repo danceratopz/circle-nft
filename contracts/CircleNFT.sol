@@ -19,7 +19,7 @@ contract CircleNFT is ERC721, Ownable {
 
     address erc20Address;
     mapping(uint256 => uint256) erc20Balances;
-    uint256 maxRadius = 1 ether;
+    uint256 maxRadius = 100 ether;
 
     constructor(address _erc20Address) ERC721("CircleNFT", "CIRCLE") {
         erc20Address = _erc20Address;
@@ -83,8 +83,16 @@ contract CircleNFT is ERC721, Ownable {
 
         string memory name = string.concat("Circle ", tokenId.toString());
         string memory radius = getRadius(tokenId).toString();
+        string memory svg = string.concat(
+            '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" style="background:#fff">',
+            '<circle cx="100" cy="100" r="',
+            radius,
+            '" fill="#000"/>',
+            "</svg>"
+        );
         string memory json = string.concat(
             '{"name":"', name, '",',
+            '"image":"data:image/svg+xml;base64,', Base64.encode(bytes(svg)), '",',
             '"radius":"', radius, '"}'
             );
         return
